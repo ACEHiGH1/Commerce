@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h3>CLOSED!</h3>
+    <div class="card mb-3">
+        <img class="card-img-top" src="{{listing.image_url}}" alt="{{listing.title}}">
+        <div class="card-body">
+          <h3 class="card-title">CLOSED!</h3>
+          <h5 class="card-title">{{listing.title}}</h5>
+          <p class="card-text">Description: {{listing.description}}</p>
+          <p class="card-text">Category : <a href="{% url 'category' listing.category %}">{{listing.category}}</a></p>
+          <p class="card-text">Winning Bid: ${{listing.starting_bid}} by {{listing.starting_bid.bidderUser}}</p>
+          <h3 class="card-title">Winner is: {{listing.starting_bid.bidderUser}} </h3>
+        </div>
+        {% if user.username == listing.starting_bid.bidderUser.username %}
+        <div class="alert alert-success" role="alert">
+           Congratulations! You won!
+          </div>
+        {% endif %}
+    </div>
+{% endblock %}
